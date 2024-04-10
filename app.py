@@ -10,8 +10,18 @@ def download_notebook(notebook_file):
     return href
 
 def main():
-    st.title('NotebookForge')
-    st.markdown('### ～Markdown to Jupyter Notebook Converter～')
+
+    st.markdown('''
+    
+<p align="center">
+<img src="https://raw.githubusercontent.com/Sunwood-ai-labs/NotebookForgeBeta/main/docs/NotebookForge_icon.jpg" width="50%">
+<br>
+<h1 align="center">NotebookForge</h1>
+<h3 align="center">～Markdown to Jupyter Notebook Converter～</h3>
+
+</p>
+
+    ''', unsafe_allow_html=True)
     markdown_content = st.text_area('Markdownファイルの内容を貼り付けてください', height=400)
     
     if st.button('変換'):
