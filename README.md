@@ -11,7 +11,7 @@ license: mit
 ---
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/Sunwood-ai-labs/NotebookForge/main/docs/NotebookForge_icon.png" width="100%">
+<img src="https://raw.githubusercontent.com/Sunwood-ai-labs/NotebookForgeBeta/main/docs/NotebookForge_icon.jpg" width="100%">
 <br>
 <h1 align="center">NotebookForge</h1>
 
