@@ -38,16 +38,26 @@ NotebookForgeの使用例として、Cohere APIのClassifyエンドポイント�
 
 このようにNotebookForgeを使うことで、APIドキュメントやチュートリアルを対話的なNotebook形式で提供できます。
 
+
+
 ## Updates
-NotebookForge v0.1.0では以下の機能が追加・改善されました。
 
-- Cohere APIのClassifyエンドポイントについての解説をサンプルに追加
-- READMEファイルを追加し、プロジェクトの概要とツールの使い方を記載
-- `example`ディレクトリを新設し、サンプルファイルを整理
-- サンプルコードのインデントを修正し可読性を向上
+- [2024/04/11] [NotebookForge v1.0.0](https://github.com/Sunwood-ai-labs/NotebookForgeBeta/releases/tag/v1.0.0)
+  - Streamlitベースのウェブアプリを実装
+    - ユーザーフレンドリーなGUIでマークダウンからノートブックへの変換を実行可能に
+    - 生成されたノートブックをダウンロードする機能を追加
+  - Hugging Faceでのデモアプリをリリース
+    - [NotebookForgeDemo](https://huggingface.co/spaces/MakiAi/NotebookForgeDemo)にてアプリを公開
+  - ノートブック生成ロジックの最適化
+  - ドキュメントの拡充
+  - マークダウン解析時のバグを修正
 
-今後のリリースでは以下のような機能追加を予定しています。
-- Hugging Face のウェブアプリ
+- [2024/04/10] [NotebookForge v0.2.0](https://github.com/Sunwood-ai-labs/NotebookForgeBeta/releases/tag/v0.2.0) 
+  - Cohere APIのClassifyエンドポイントについての解説をサンプルに追加
+  - READMEファイルを追加し、プロジェクトの概要とツールの使い方を記載 
+  - `example`ディレクトリを新設し、サンプルファイルを整理
+  - サンプルコードのインデントを修正し可読性を向上
+
 
 ## Getting Started
 ### インストール
