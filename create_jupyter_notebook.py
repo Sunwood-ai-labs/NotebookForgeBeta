@@ -6,32 +6,28 @@ def create_jupyter_notebook(markdown_file, output_file):
         markdown_content = file.read()
 
     cells = []
-    chunks = re.split(r'(#+\s.*)', markdown_content)
+    chunks = re.split(r'(```.*?```)', markdown_content, flags=re.DOTALL)
 
     for i in range(len(chunks)):
         chunk = chunks[i].strip()
         if chunk:
-            if chunk.startswith('#'):
+            if chunk.startswith('```') and chunk.endswith('```'):
+                language = chunk[3:chunk.find('\n')]
+                code_lines = chunk[chunk.find('\n')+1:-3].strip().split('\n')
                 cells.append({
-                    'cell_type': 'markdown',
-                    'source': [chunk]
+                    'cell_type': 'code',
+                    'execution_count': None,
+                    'metadata': {},
+                    'outputs': [],
+                    'source': code_lines
                 })
             else:
-                code_chunks = re.split(r'```python\n(.*?)```', chunk, flags=re.DOTALL)
-                for j in range(len(code_chunks)):
-                    if j % 2 == 0 and code_chunks[j].strip():
+                markdown_chunks = re.split(r'(#+\s.*)', chunk)
+                for j in range(len(markdown_chunks)):
+                    if markdown_chunks[j].strip():
                         cells.append({
                             'cell_type': 'markdown',
-                            'source': code_chunks[j].strip().split('\n')
-                        })
-                    elif j % 2 == 1:
-                        code_lines = code_chunks[j].strip().split('\n')
-                        cells.append({
-                            'cell_type': 'code',
-                            'execution_count': None,
-                            'metadata': {},
-                            'outputs': [],
-                            'source': code_lines
+                            'source': [markdown_chunks[j].strip()]
                         })
 
     notebook = {
@@ -56,8 +52,7 @@ def create_jupyter_notebook(markdown_file, output_file):
         json.dump(notebook, file, indent=2)
 
 if __name__ == '__main__':
-
     # 使用例
-    markdown_file = 'example/example01.md'
-    output_file = 'example/example01.ipynb'
+    markdown_file = 'example/example02.md'
+    output_file = 'example/example02.ipynb'
     create_jupyter_notebook(markdown_file, output_file)

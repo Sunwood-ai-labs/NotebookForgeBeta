@@ -2,6 +2,17 @@ import streamlit as st
 from create_jupyter_notebook import create_jupyter_notebook
 import base64
 
+
+def load_markdown(file_path):
+    with open(file_path, encoding="utf8") as f:
+        return f.read()
+
+
+def display_front_page():
+    html_front = load_markdown('docs/page_front.md')
+    st.markdown(f"{html_front}", unsafe_allow_html=True)
+
+
 def download_notebook(notebook_file):
     with open(notebook_file, 'rb') as file:
         notebook_data = file.read()
@@ -10,18 +21,8 @@ def download_notebook(notebook_file):
     return href
 
 def main():
+    display_front_page()
 
-    st.markdown('''
-    
-<p align="center">
-<img src="https://raw.githubusercontent.com/Sunwood-ai-labs/NotebookForgeBeta/main/docs/NotebookForge_icon.jpg" width="50%">
-<br>
-<h1 align="center">NotebookForge</h1>
-<h3 align="center">～Markdown to Jupyter Notebook Converter～</h3>
-
-</p>
-
-    ''', unsafe_allow_html=True)
     markdown_content = st.text_area('Markdownファイルの内容を貼り付けてください', height=400)
     
     if st.button('変換'):

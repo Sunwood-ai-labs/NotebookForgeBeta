@@ -1,0 +1,144 @@
+# AIMO Starter Notebook Gemma 7b
+
+このノートブックでは、Kaggleのプラットフォームを利用して数学オリンピックの問題を解答するモデルを構築します。以下の手順で進めていきます。
+
+# 1. ライブラリとデータセットのインポート
+
+最初に必要なライブラリをインポートし、データセットを読み込みます。
+
+```python
+import numpy as np # 線形代数用ライブラリ
+import pandas as pd # データ処理用ライブラリ
+import re # 正規表現用ライブラリ
+import os # ファイル操作用ライブラリ
+
+# カレントディレクトリ内のデータセットを確認
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+```
+
+# 2. 必要なライブラリのインストール
+
+モデル構築に必要なライブラリをインストールします。
+
+```python
+!pip install -q tensorflow-cpu
+!pip install -q -U keras-nlp tensorflow-hub
+!pip install -q -U keras>=3
+!pip install -U tensorflow-text
+```
+
+# 3. 環境設定
+
+JAXを使用するために環境変数を設定します。
+
+```python
+import jax
+
+jax.devices()
+
+import os
+
+os.environ["KERAS_BACKEND"] = "jax"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"]="0.9"
+
+import keras
+import keras_nlp
+```
+
+# 4. デバイスメッシュの設定
+
+モデルを複数のTPUで並列に実行するためのデバイスメッシュを設定します。
+
+```python
+device_mesh = keras.distribution.DeviceMesh(
+    (1, 8),
+    ["batch", "model"],
+    devices=keras.distribution.list_devices())
+```
+
+# 5. データセットの読み込み
+
+学習用データと評価用データを読み込みます。
+
+```python
+Test = pd.read_csv('/kaggle/input/ai-mathematical-olympiad-prize/test.csv')
+Train = pd.read_csv('/kaggle/input/ai-mathematical-olympiad-prize/train.csv')
+```
+
+# 6. モデルの設定
+
+モデルの並列化のためのレイアウトマップを設定し、Gemma 7bモデルを読み込みます。
+
+```python
+model_dim = "model"
+
+layout_map = keras.distribution.LayoutMap(device_mesh)
+
+# 各層の重みを適切にシャーディングするためのレイアウトマップを設定
+layout_map["token_embedding/embeddings"] = (None, model_dim)
+layout_map["decoder_block.*attention.*(query|key|value).*kernel"] = (
+    None, model_dim, None)
+layout_map["decoder_block.*attention_output.*kernel"] = (
+    None, None, model_dim)
+layout_map["decoder_block.*ffw_gating.*kernel"] = (model_dim, None)
+layout_map["decoder_block.*ffw_linear.*kernel"] = (None, model_dim)
+
+%%time
+
+model_parallel = keras.distribution.ModelParallel(
+    device_mesh, layout_map, batch_dim_name="batch")
+
+keras.distribution.set_distribution(model_parallel)
+gemma_lm = keras_nlp.models.GemmaCausalLM.from_preset("gemma_instruct_7b_en")
+```
+
+# 7. モデルのテスト
+
+読み込んだモデルを使用して、学習データの問題を解答します。
+
+```python
+responses = []
+
+for i in Train['problem']:
+    prompt = (f"Hello! I hope you are excellent. I'm going to expose you a math problem, please give me the ONLY the answer as an integer number. PROBLEM: {i}")
+    response = gemma_lm.generate(prompt,max_length=850)
+    print(response)
+    responses.append(response)
+
+Train['gemma_7b_answer'] = responses
+
+def extract_integer(text):
+    match = re.search(r'The answer is: (\d+)', text)
+    if match:
+        return int(match.group(1))
+    else:
+        return None
+
+Train['gemma_7b_answer_integer'] = Train['gemma_7b_answer'].apply(extract_integer)
+Train['gemma_7b_answer'] = Train['gemma_7b_answer_integer']
+Train = Train.drop('gemma_7b_answer_integer', axis=1)
+```
+
+# 8. 評価
+
+モデルの解答結果を確認します。
+
+```python
+Train
+```
+
+> The results are awful, it seems that Gemma 7b needs a hard training in math in order to pass the exams!
+
+結果はあまり良くないようです。Gemma 7bモデルを数学の問題に適応させるためには、さらなる学習が必要そうです。
+
+# 9. 次のステップ
+
+- Gemma 7bモデルのファインチューニング
+- 他のモデルの試行
+   - Mixtral
+   - Llama
+   - など
+
+以上が、Kaggleのノートブックを使用した数学オリンピック問題の解答モデルの構築手順です。初心者の方でもコードの流れが理解しやすいように、各処理をセルごとに分割し、コメントを付与しました。これを参考に、さらなるモデルの改善に取り組んでみてください。
