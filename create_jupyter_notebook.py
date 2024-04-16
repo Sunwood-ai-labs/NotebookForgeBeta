@@ -13,7 +13,8 @@ def create_jupyter_notebook(markdown_file, output_file):
         if chunk:
             if chunk.startswith('```') and chunk.endswith('```'):
                 language = chunk[3:chunk.find('\n')]
-                code_lines = chunk[chunk.find('\n')+1:-3].strip().split('\n')
+                code_lines = chunk[chunk.find('\n')+1:-3].split('\n')
+                code_lines = [line + '\n' for line in code_lines[:-1]] + [code_lines[-1]]
                 cells.append({
                     'cell_type': 'code',
                     'execution_count': None,
@@ -22,13 +23,14 @@ def create_jupyter_notebook(markdown_file, output_file):
                     'source': code_lines
                 })
             else:
-                markdown_chunks = re.split(r'(#+\s.*)', chunk)
-                for j in range(len(markdown_chunks)):
-                    if markdown_chunks[j].strip():
-                        cells.append({
-                            'cell_type': 'markdown',
-                            'source': [markdown_chunks[j].strip()]
-                        })
+                markdown_lines = chunk.split('\n')
+                markdown_lines = [line + '\n' for line in markdown_lines[:-1]] + [markdown_lines[-1]]
+                cell = {
+                    'cell_type': 'markdown',
+                    'metadata': {},
+                    'source': markdown_lines
+                }
+                cells.append(cell)
 
     notebook = {
         'nbformat': 4,
@@ -48,11 +50,14 @@ def create_jupyter_notebook(markdown_file, output_file):
         'cells': cells
     }
 
-    with open(output_file, 'w') as file:
-        json.dump(notebook, file, indent=2)
+    with open(output_file.replace(".ipynb", ".json"), 'w', encoding='utf-8') as file:
+        json.dump(notebook, file, indent=2, ensure_ascii=False)
+
+    with open(output_file, 'w', encoding='utf-8') as file:
+        json.dump(notebook, file, indent=2, ensure_ascii=False)
 
 if __name__ == '__main__':
     # 使用例
-    markdown_file = 'example/example02.md'
-    output_file = 'example/example02.ipynb'
+    markdown_file = 'example/example03.md'
+    output_file = 'example/example03.ipynb'
     create_jupyter_notebook(markdown_file, output_file)

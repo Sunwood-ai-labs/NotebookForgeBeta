@@ -16,14 +16,25 @@
   "cells": [
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# AIMO Starter Notebook Gemma 7b\n",
-        "\n",
-        "このノートブックでは、Kaggleのプラットフォームを利用して数学オリンピックの問題を解答するモデルを構築します。以下の手順で進めていきます。\n",
-        "\n",
-        "# 1. ライブラリとデータセットのインポート\n",
-        "\n",
+        "# AIMO Starter Notebook Gemma 7b"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "このノートブックでは、Kaggleのプラットフォームを利用して数学オリンピックの問題を解答するモデルを構築します。以下の手順で進めていきます。"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 1. ライブラリとデータセットのインポート"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "最初に必要なライブラリをインポートし、データセットを読み込みます。"
       ]
     },
@@ -46,10 +57,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 2. 必要なライブラリのインストール\n",
-        "\n",
+        "# 2. 必要なライブラリのインストール"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "モデル構築に必要なライブラリをインストールします。"
       ]
     },
@@ -67,10 +81,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 3. 環境設定\n",
-        "\n",
+        "# 3. 環境設定"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "JAXを使用するために環境変数を設定します。"
       ]
     },
@@ -95,10 +112,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 4. デバイスメッシュの設定\n",
-        "\n",
+        "# 4. デバイスメッシュの設定"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "モデルを複数のTPUで並列に実行するためのデバイスメッシュを設定します。"
       ]
     },
@@ -116,10 +136,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 5. データセットの読み込み\n",
-        "\n",
+        "# 5. データセットの読み込み"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "学習用データと評価用データを読み込みます。"
       ]
     },
@@ -135,10 +158,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 6. モデルの設定\n",
-        "\n",
+        "# 6. モデルの設定"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "モデルの並列化のためのレイアウトマップを設定し、Gemma 7bモデルを読み込みます。"
       ]
     },
@@ -172,10 +198,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 7. モデルのテスト\n",
-        "\n",
+        "# 7. モデルのテスト"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "読み込んだモデルを使用して、学習データの問題を解答します。"
       ]
     },
@@ -209,10 +238,13 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "# 8. 評価\n",
-        "\n",
+        "# 8. 評価"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
         "モデルの解答結果を確認します。"
       ]
     },
@@ -227,21 +259,20 @@
     },
     {
       "cell_type": "markdown",
-      "metadata": {},
       "source": [
-        "> The results are awful, it seems that Gemma 7b needs a hard training in math in order to pass the exams!\n",
-        "\n",
-        "結果はあまり良くないようです。Gemma 7bモデルを数学の問題に適応させるためには、さらなる学習が必要そうです。\n",
-        "\n",
-        "# 9. 次のステップ\n",
-        "\n",
-        "- Gemma 7bモデルのファインチューニング\n",
-        "- 他のモデルの試行\n",
-        "   - Mixtral\n",
-        "   - Llama\n",
-        "   - など\n",
-        "\n",
-        "以上が、Kaggleのノートブックを使用した数学オリンピック問題の解答モデルの構築手順です。初心者の方でもコードの流れが理解しやすいように、各処理をセルごとに分割し、コメントを付与しました。これを参考に、さらなるモデルの改善に取り組んでみてください。"
+        "> The results are awful, it seems that Gemma 7b needs a hard training in math in order to pass the exams!\n\n結果はあまり良くないようです。Gemma 7bモデルを数学の問題に適応させるためには、さらなる学習が必要そうです。"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 9. 次のステップ"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "- Gemma 7bモデルのファインチューニング\n- 他のモデルの試行\n   - Mixtral\n   - Llama\n   - など\n\n以上が、Kaggleのノートブックを使用した数学オリンピック問題の解答モデルの構築手順です。初心者の方でもコードの流れが理解しやすいように、各処理をセルごとに分割し、コメントを付与しました。これを参考に、さらなるモデルの改善に取り組んでみてください。"
       ]
     }
   ]

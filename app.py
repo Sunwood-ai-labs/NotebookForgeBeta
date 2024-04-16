@@ -29,7 +29,7 @@ def main():
         if markdown_content.strip():
             with open('temp_markdown.md', 'w', encoding='utf-8') as file:
                 file.write(markdown_content)
-            
+                        
             output_file = 'output_notebook.ipynb'
             create_jupyter_notebook('temp_markdown.md', output_file)
             

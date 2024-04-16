@@ -1,0 +1,136 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Google Colabは無料で利用できるクラウドベースのJupyter Notebook環境です。Colabを使うと、ブラウザ上でPythonコードを実行し、機械学習モデルの構築やデータ分析を手軽に行えます。ここでは、Google ColabでKaggleのデータセットをダウンロードする手順を解説します。\n",
+        "\n",
+        "## 事前準備\n",
+        "1. Kaggleアカウントを作成し、ログインしておきます。\n",
+        "2. Kaggleの`Account`設定ページから`Create New API Token`をクリックし、`kaggle.json`ファイルをダウンロードします。\n",
+        "\n",
+        "## 手順\n",
+        "### ステップ1: Secretsの設定\n",
+        "1. Colabのノートブックを開き、右上の`ランタイム`をクリックし、`ランタイムのタイプを変更`を選択します。\n",
+        "2. ハードウェアアクセラレータを`なし`に設定し、`保存`をクリックします。\n",
+        "3. ノートブックの最初のセルに以下のコードを入力し、実行します。"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from google.colab import userdata\n",
+        "userdata.set('KAGGLE_USERNAME', 'your_kaggle_username')\n",
+        "userdata.set('KAGGLE_KEY', 'your_kaggle_api_key')\n",
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "`your_kaggle_username`と`your_kaggle_api_key`は、実際のKaggleのユーザー名とAPIキーに置き換えてください。APIキーは`kaggle.json`ファイルの中にある`key`の値です。\n",
+        "\n",
+        "### ステップ2: 認証情報の設定\n",
+        "以下のコードを新しいセルに入力し、実行します。"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from google.colab import userdata\n",
+        "import os\n",
+        "\n",
+        "os.environ[\"KAGGLE_KEY\"] = userdata.get('KAGGLE_KEY')\n",
+        "os.environ[\"KAGGLE_USERNAME\"] = userdata.get('KAGGLE_USERNAME')\n",
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "これにより、KaggleのAPIキーとユーザー名が環境変数に設定されます。\n",
+        "\n",
+        "### ステップ3: kaggleライブラリのインストール\n",
+        "次に、以下のコマンドを実行し、kaggleライブラリをインストールします。"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "!pip install kaggle\n",
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### ステップ4: データセットのダウンロード\n",
+        "以下のコマンドを実行し、目的のデータセットをダウンロードします。`dataset-name`は実際のデータセット名に置き換えてください。"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "!kaggle datasets download dataset-name\n",
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### ステップ5: データセットの解凍\n",
+        "ダウンロードしたデータセットは通常ZIP形式で圧縮されています。以下のコマンドで解凍します。`dataset.zip`は実際のZIPファイル名に置き換えてください。"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "!unzip dataset.zip\n",
+        ""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "以上の手順で、Google ColabでKaggleのデータセットをダウンロードし、解凍することができます。Secretsを使用することで、認証情報を安全に管理しながらKaggleのデータセットにアクセスできます。\n",
+        "\n",
+        "あとは、解凍したデータを使ってデータ分析や機械学習モデルの構築を進めていきましょう。Google Colabを活用することで、高性能な計算環境を無料で利用でき、Kaggleのデータセットを使った実験も容易に行えます。この記事が、皆さんのデータサイエンスの学習や研究に役立つことを願っています。"
+      ]
+    }
+  ]
+}
