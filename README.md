@@ -49,7 +49,11 @@ NotebookForgeの使用例として、Cohere APIのClassifyエンドポイント�
 
 
 
+
 ## Updates
+
+- [2024/04/17] [NotebookForge v2.0.0](https://github.com/Sunwood-ai-labs/NotebookForge/releases/tag/v2.0.0)
+  - Markdownファイルから Jupyter Notebookを生成する機能を大幅に改善
 
 - [2024/04/11] [NotebookForge v1.0.0](https://github.com/Sunwood-ai-labs/NotebookForgeBeta/releases/tag/v1.0.0)
   - Streamlitベースのウェブアプリを実装
