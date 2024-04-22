@@ -1,6 +1,7 @@
 import streamlit as st
 from create_jupyter_notebook import create_jupyter_notebook
 import base64
+import re
 
 
 def load_markdown(file_path):
@@ -20,6 +21,13 @@ def download_notebook(notebook_file):
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{notebook_file}">ノートブックをダウンロード</a>'
     return href
 
+def get_first_heading(markdown_content):
+    match = re.search(r'^#\s*(.*)', markdown_content, re.MULTILINE)
+    if match:
+        return match.group(1).strip()
+    else:
+        return 'output_notebook'
+
 def main():
     display_front_page()
 
@@ -30,7 +38,7 @@ def main():
             with open('temp_markdown.md', 'w', encoding='utf-8') as file:
                 file.write(markdown_content)
                         
-            output_file = 'output_notebook.ipynb'
+            output_file = f"{get_first_heading(markdown_content)}.ipynb"
             create_jupyter_notebook('temp_markdown.md', output_file)
             
             st.success('ノートブックが生成されました。')
