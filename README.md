@@ -17,11 +17,11 @@ license: mit
 <h3 align="center">～Markdown to Jupyter Notebook Converter～
 
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/MakiAi/NotebookForgeDemo)
-[![GitHub Stars](https://img.shields.io/github/stars/Sunwood-ai-labs/NotebookForge)](https://github.com/Sunwood-ai-labs/NotebookForge)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/Sunwood-ai-labs/NotebookForge)](https://github.com/Sunwood-ai-labs/NotebookForge)
-[![GitHub Top Language](https://img.shields.io/github/languages/top/Sunwood-ai-labs/NotebookForge)](https://github.com/Sunwood-ai-labs/NotebookForge)
-[![GitHub Release](https://img.shields.io/github/v/release/Sunwood-ai-labs/NotebookForge?sort=date&color=red)](https://github.com/Sunwood-ai-labs/NotebookForge)
-[![GitHub Tag](https://img.shields.io/github/v/tag/Sunwood-ai-labs/NotebookForge?color=orange)](https://github.com/Sunwood-ai-labs/NotebookForge)
+[![GitHub Stars](https://img.shields.io/github/stars/Sunwood-ai-labs/NotebookForgeBeta)](https://github.com/Sunwood-ai-labs/NotebookForgeBeta)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/Sunwood-ai-labs/NotebookForgeBeta)](https://github.com/Sunwood-ai-labs/NotebookForgeBeta)
+[![GitHub Top Language](https://img.shields.io/github/languages/top/Sunwood-ai-labs/NotebookForgeBeta)](https://github.com/Sunwood-ai-labs/NotebookForgeBeta)
+[![GitHub Release](https://img.shields.io/github/v/release/Sunwood-ai-labs/NotebookForge?sort=date&color=red)](https://github.com/Sunwood-ai-labs/NotebookForgeBeta)
+[![GitHub Tag](https://img.shields.io/github/v/tag/Sunwood-ai-labs/NotebookForge?color=orange)](https://github.com/Sunwood-ai-labs/NotebookForgeBeta)
 
 </h3>
 </p>
